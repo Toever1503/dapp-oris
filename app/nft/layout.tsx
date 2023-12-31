@@ -25,7 +25,7 @@ export default function RootLayout({
       <Space className='w-full justify-center font-[600] text-xl' size={100}>
         <Menu style={{ width: '100%', padding: '10px' }} mode="horizontal" items={navbarMenuItems} />
       </Space>
-      <div>
+      <div className="lg:px-[100px]">
         {children}
       </div>
     </>
