@@ -24,7 +24,7 @@ const navbarMenuItems: MenuProps['items'] = [
         key: 'paymnent',
     },
     {
-        label: <Link href="#">
+        label: <Link href="counter">
             Guide
         </Link>,
         key: 'payssmnent',

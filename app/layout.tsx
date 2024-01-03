@@ -4,6 +4,7 @@ import './globals.css'
 import StyledComponentsRegistry from '@/common/antd/lib/AntdRegistry'
 import AntdTheme from '@/common/antd/theme/themeConfig'
 import { ConfigProvider } from 'antd'
+import StoreProvider from './StoreProvider'
 const inter = Inter({ subsets: ['latin'] })
 
 
@@ -15,11 +16,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
-        <ConfigProvider theme={AntdTheme}>
-          <StyledComponentsRegistry >
-            {children}
-          </StyledComponentsRegistry>
-        </ConfigProvider>
+        <StoreProvider >
+          <ConfigProvider theme={AntdTheme}>
+            <StyledComponentsRegistry >
+              {children}
+            </StyledComponentsRegistry>
+          </ConfigProvider>
+        </StoreProvider>
       </body>
     </html>
   )
