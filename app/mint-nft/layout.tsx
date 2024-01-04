@@ -1,5 +1,6 @@
 'use client'
-import { Layout, Space, Button } from 'antd';
+import WalletConnectBtn from '@/components/WalletConnectBtn';
+import { Layout, Space } from 'antd';
 import Link from 'next/link';
 
 export default function mintNftLayout({
@@ -14,9 +15,7 @@ export default function mintNftLayout({
           <Space className="justify-between items-between w-full">
             <Link href="/" className='text-white text-xl'>Orisu</Link>
             <Space >
-              <Button type="primary">
-                Connect wallet
-              </Button>
+              <WalletConnectBtn />
             </Space>
           </Space>
         </Layout.Header>

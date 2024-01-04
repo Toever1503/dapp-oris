@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 
 
 
-export default async function Page() {
+export default function Page() {
 
   // const data = await getData();
   const _route = usePathname();

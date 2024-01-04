@@ -5,7 +5,6 @@ import StyledComponentsRegistry from '@/common/antd/lib/AntdRegistry'
 import AntdTheme from '@/common/antd/theme/themeConfig'
 import { ConfigProvider } from 'antd'
 import StoreProvider from './StoreProvider'
-import { Web3Modal } from "@/components/Web3Modal";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,10 +21,10 @@ export default function RootLayout({
         <StoreProvider >
           <ConfigProvider theme={AntdTheme}>
             <StyledComponentsRegistry >
-            <Web3Modal>
+              {/* <Web3Modal>
               {children}
-            </Web3Modal>
-
+            </Web3Modal> */}
+              {children}
             </StyledComponentsRegistry>
           </ConfigProvider>
         </StoreProvider>

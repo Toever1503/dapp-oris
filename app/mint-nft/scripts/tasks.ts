@@ -1,5 +1,4 @@
-
-import { useWeb3Modal } from '@web3modal/wagmi/react'
+import WalletConnectBtn from "@/components/WalletConnectBtn";
 
 
 const taskList = [
@@ -9,7 +8,8 @@ const taskList = [
         hasDone: false,
         buttonTitle: "Connect Now",
         onClickDoTask: connectWallet,
-        btnLoading: false
+        btnLoading: false,
+        btnTemplate: 1
     },
     {
         index: 2,
@@ -21,9 +21,9 @@ const taskList = [
     },
     {
         index: 3,
-        content: "Follow page",
+        content: "Like fb page",
         hasDone: false,
-        buttonTitle: "Follow Now",
+        buttonTitle: "Do Now",
         onClickDoTask: likeFbPage,
         btnLoading: false
     },
@@ -37,24 +37,26 @@ const taskList = [
     }
 ];
 function connectWallet(item: any, setCurrentTask: Function) {
-    const { open } = useWeb3Modal()
     return () => {
-        open();
+        setCurrentTask(3);
     };
 }
 function connectFb(item: any, setCurrentTask: Function) {
     return () => {
-
+        localStorage.setItem('hasConnectedFb', '1');
+        setCurrentTask(3);
     };
 }
 function likeFbPage(item: any, setCurrentTask: Function) {
     return () => {
-
+        localStorage.setItem('hasLikedFbPage', '1');
+        setCurrentTask(4);
     };
 }
 function shareFbPost(item: any, setCurrentTask: Function) {
     return () => {
-
+        localStorage.setItem('hasSharedFbPost', '1');
+        setCurrentTask(5);
     };
 }
 
