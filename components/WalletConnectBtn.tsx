@@ -1,7 +1,10 @@
 'use client'
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { initializeOrisNftContract } from "@/store/mintnft/orisNftSlice";
+import { setWalletAddress } from "@/store/wallet/walletSlice";
 import { Button, Dropdown, MenuProps, message } from "antd";
 import { useEffect, useState } from "react";
-import { Web3 } from 'web3';
+import Web3, { Address, ContractAbi } from 'web3';
 
 /* To connect using MetaMask */
 
@@ -9,6 +12,8 @@ import { Web3 } from 'web3';
 
 
 export default function WalletConnectBtn() {
+    const _walletAddress = useAppSelector(state => state.wallet.address);
+    const _dispatch = useAppDispatch();
     const [walletPopupTrigger, updateWalletPopupTrigger] = useState(['hover']);
     const walletItems: MenuProps['items'] = [
         {
@@ -40,6 +45,7 @@ export default function WalletConnectBtn() {
     };
 
     async function connect() {
+
         // @ts-ignore
         if (window.ethereum) {
             // @ts-ignore
@@ -52,24 +58,20 @@ export default function WalletConnectBtn() {
             // Get the user's accounts
             wweb3.eth.getAccounts().then(function (accounts) {
                 // Show the first account
-                console.log('Connected with MetaMask account: ' + accounts);
+                console.log('Connected with MetaMask account: ' + accounts[1]);
+                _dispatch(setWalletAddress(accounts));
+                _dispatch(initializeOrisNftContract());
             });
             console.log('wallet has connected');
+
 
         } else {
             console.log("No wallet");
         }
     }
-    const [walletAddress, setWalletAddress] = useState<string>('');
 
 
     useEffect(() => {
-        // if (window.screen.width < 1200)
-        // updateWalletPopupTrigger(['click'])
-        // @ts-ignore
-        if (ethereum.address)
-            // @ts-ignore
-            setWalletAddress(ethereum.address);
     }, []);
     return <>
         {/* <Dropdown menu={{ items: walletItems, onClick: onClickWallet }} trigger={['click']} placement="bottom" arrow>
@@ -78,12 +80,12 @@ export default function WalletConnectBtn() {
             </Button>
         </Dropdown> */}
         {
-            walletAddress == '' ?
+            _walletAddress == '' ?
                 <Button type="primary" onClick={connect}>
                     Connect wallet
                 </Button>
                 : <p className="text-white">
-                    {walletAddress}
+                    {_walletAddress}
                 </p>
         }
 
