@@ -3,7 +3,7 @@ import { Timeline, Button, Space, notification } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { ReactNode, useEffect, useState } from 'react';
-import WalletConnectBtn from '@/components/WalletConnectBtn';
+import WalletConnectBtn from '@/app/components/WalletConnectBtn';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import Web3, { Contract } from 'web3';
 import { useSearchParams } from 'next/navigation';

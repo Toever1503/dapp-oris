@@ -1,4 +1,4 @@
-import WalletConnectBtn from "@/components/WalletConnectBtn";
+import WalletConnectBtn from "@/app/components/WalletConnectBtn";
 import { useAppSelector } from "@/store/hooks";
 import { useSearchParams } from "next/navigation";
 

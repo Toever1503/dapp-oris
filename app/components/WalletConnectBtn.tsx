@@ -9,8 +9,6 @@ import Web3, { Address, ContractAbi } from 'web3';
 /* To connect using MetaMask */
 
 
-
-
 export default function WalletConnectBtn() {
     const _walletAddress = useAppSelector(state => state.wallet.address);
     const _dispatch = useAppDispatch();

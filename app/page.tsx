@@ -1,16 +1,12 @@
 'use client'
-import TheHeader from '@/components/TheHeader';
-import { usePathname } from 'next/navigation'
+import TheHeader from '@/app/components/TheHeader';
 
 
 
 export default function Page() {
 
   // const data = await getData();
-  const _route = usePathname();
 
-  console.log("route: ", _route);
-  
   return (
     <>
       <TheHeader />
