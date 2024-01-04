@@ -10,12 +10,16 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.18.2",
+    "@ant-design/icons": "^5.2.6",
     "@reduxjs/toolkit": "^2.0.1",
+    "@web3modal/wagmi": "^3.5.3",
     "antd": "^5.12.5",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
     "react-redux": "^9.0.4",
+    "viem": "^2.0.0",
+    "wagmi": "^1.4.13",
     "web3": "^4.3.0"
   },
   "devDependencies": {

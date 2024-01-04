@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { fetchCounterData, increment, decrement } from "@/store/counter/counterSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks"

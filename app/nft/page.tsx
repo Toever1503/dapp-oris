@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import ProductItem from "@/components/nft/ProductItem";
 import { IProduct } from "@/types/nft/IProduct";

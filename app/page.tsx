@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import TheHeader from '@/components/TheHeader';
 import { usePathname } from 'next/navigation'
 
