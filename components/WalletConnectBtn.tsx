@@ -2,7 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { initializeOrisNftContract } from "@/store/mintnft/orisNftSlice";
 import { setWalletAddress } from "@/store/wallet/walletSlice";
-import { Button, Dropdown, MenuProps, message } from "antd";
+import { Button, Dropdown, MenuProps, message, notification } from "antd";
 import { useEffect, useState } from "react";
 import Web3, { Address, ContractAbi } from 'web3';
 
@@ -58,7 +58,10 @@ export default function WalletConnectBtn() {
             wweb3.eth.getAccounts().then(function (accounts) {
                 // Show the first account
                 console.log('Connected with MetaMask account: ' + accounts);
-                _dispatch(setWalletAddress(accounts[0]));
+                if (accounts[0])
+                    _dispatch(setWalletAddress(accounts[0]));
+                else
+                    _dispatch(setWalletAddress(accounts));
                 _dispatch(initializeOrisNftContract(wweb3));
             });
             console.log('wallet has connected');
@@ -66,6 +69,9 @@ export default function WalletConnectBtn() {
 
         } else {
             console.log("No wallet");
+            notification.warning({
+                message: "Please install metamask wallet and switch to bnbtest netowrk!"
+            })
         }
     }
 
