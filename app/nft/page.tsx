@@ -1,6 +1,6 @@
 'use client'
 
-import ProductItem from "@/app/components/nft/ProductItem";
+import ProductItem from "@/components/nft/ProductItem";
 import { IProduct } from "@/types/nft/IProduct";
 import { useState } from "react";
 

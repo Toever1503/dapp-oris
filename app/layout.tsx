@@ -4,7 +4,7 @@ import './globals.css'
 import StyledComponentsRegistry from '@/common/antd/lib/AntdRegistry'
 import AntdTheme from '@/common/antd/theme/themeConfig'
 import { ConfigProvider } from 'antd'
-import StoreProvider from './StoreProvider'
+import StoreProvider from '../components/StoreProvider'
 import dynamic from 'next/dynamic'
 
 const inter = Inter({ subsets: ['latin'] })

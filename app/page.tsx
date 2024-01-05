@@ -1,5 +1,7 @@
 'use client'
-import TheHeader from '@/app/components/TheHeader';
+import TheHeader from '@/components/TheHeader';
+import MintPage from './mint-nft/page';
+import MintNftLayout from './mint-nft/layout';
 
 
 
@@ -9,7 +11,11 @@ export default function Page() {
 
   return (
     <>
-      <TheHeader />
+      {/* <TheHeader /> */}
+      <MintNftLayout >
+
+        <MintPage/>
+      </MintNftLayout>
     </>
   )
 }

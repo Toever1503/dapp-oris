@@ -1,9 +1,9 @@
 'use client'
-import WalletConnectBtn from '@/app/components/WalletConnectBtn';
+import WalletConnectBtn from '@/components/WalletConnectBtn';
 import { Layout, Space } from 'antd';
 import Link from 'next/link';
 
-export default function mintNftLayout({
+export default function MintNftLayout({
   children,
 }: {
   children: React.ReactNode

@@ -1,5 +1,5 @@
 'use client'
-import TheHeader from '@/app/components/TheHeader';
+import TheHeader from '@/components/TheHeader';
 
 
 export default async function Page() {

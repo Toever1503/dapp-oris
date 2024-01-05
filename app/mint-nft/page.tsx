@@ -3,10 +3,11 @@ import { Timeline, Button, Space, notification } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { ReactNode, useEffect, useState } from 'react';
-import WalletConnectBtn from '@/app/components/WalletConnectBtn';
+import WalletConnectBtn from '@/components/WalletConnectBtn';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import Web3, { Contract } from 'web3';
 import { useSearchParams } from 'next/navigation';
+import { initializeOrisNftContract } from '@/store/mintnft/orisNftSlice';
 interface ITaskCheck {
   index: number;
   content: string | ReactNode;
@@ -17,7 +18,7 @@ interface ITaskCheck {
   btnTemplate?: ReactNode
 }
 
-export default function Page() {
+export default function MintPage() {
   const walletAddress = useAppSelector(state => state.wallet.address);
   const orisNftContract = useAppSelector(state => state.orisNft.contractInstance);
   const _dispatch = useAppDispatch();
@@ -90,20 +91,30 @@ export default function Page() {
   const [hasConnectedWallet, setHasConnectedWallet] = useState<boolean>(false);
 
   const claimNft = async () => {
-    console.log('claim nft');
+    console.log('claim nft: ', walletAddress);
     try {
       // @ts-ignore
-      await orisNftContract.methods.claimOrisNft(_searchParams.get("id")).call();
-      setCurrentTask(6);
-      localStorage.removeItem('hasConnectedFb')
-      localStorage.removeItem('hasLikedFbPage')
-      localStorage.removeItem('hasSharedFbPost')
-      notification.success({
-        message: "Claimed successfully!"
+      orisNftContract.methods.claimOrisNft(Number(_searchParams.get("id"))).send({
+        from: walletAddress,
+        value: Web3.utils.toWei(0,'ether')
       })
+        .then((result: any) => {
+          console.log("cliam reulst: ", result)
+          setCurrentTask(6);
+          localStorage.removeItem('hasConnectedFb')
+          localStorage.removeItem('hasLikedFbPage')
+          localStorage.removeItem('hasSharedFbPost')
+          notification.success({
+            message: "Claimed successfully!"
+          })
+        })
+        .catch((err: any) => {
+          throw err;
+        });
+
     }
     catch (err) {
-      console.log("begin mint failed: ", err);
+      console.log("claim failed: ", err);
       notification.error({
         message: "Failed to claim!"
       })
@@ -114,23 +125,26 @@ export default function Page() {
   const [nftDetail, setNftDetail] = useState<string>("");
   const initialNftList = async () => {
     try {
+      console.log("nft id: ", _searchParams.get("id"));
+
       // @ts-ignore
-      const nfOwnerAddress = await orisNftContract.methods.ownerOf(_searchParams.get("id")).call();
-      if (nfOwnerAddress == '0x0000000000000000000000000000000000000000') throw 'not exist'
-      if (nfOwnerAddress == 'walletAddress') notification.warning({
-        message: "You has claimed this nft!"
-      })
-      else if (nfOwnerAddress != '0x04a4c59A13F4eDC0990f4E153841C4251021aed8') {
-        notification.error({
-          message: "This nft has claimed!"
-        })
-      }
+      // const nfOwnerAddress = await orisNftContract.methods.ownerOf(_searchParams.get("id")).call();
+      // if (nfOwnerAddress == '0x0000000000000000000000000000000000000000') throw 'not exist'
+      // if (nfOwnerAddress == 'walletAddress') notification.warning({
+      //   message: "You has claimed this nft!"
+      // })
+      // else if (nfOwnerAddress != '0x04a4c59A13F4eDC0990f4E153841C4251021aed8') {
+      //   notification.error({
+      //     message: "This nft has claimed!"
+      //   })
+      // }
       // @ts-ignore
       const result = await orisNftContract.methods.detailNft(_searchParams.get("id")).call();
       setNftDetail(result.name)
       console.log("nftList", result);
 
     } catch (err) {
+      console.log(err)
       notification.error({
         message: "This nft isn't exist!"
       })
@@ -148,7 +162,8 @@ export default function Page() {
       if (localStorage.getItem('hasSharedFbPost'))
         setCurrentTask(5);
     }
-    initialNftList();
+    if (walletAddress)
+      initialNftList();
 
   }, [walletAddress]);
   return (
@@ -163,7 +178,7 @@ export default function Page() {
           </Space>
           <img loading='lazy' className='w-full h-full' src='https://tabi.lol/assets/iron-44d84a21.png' alt='orisu-nft' />
           <img loading='lazy' className='absolute bottom-[70px] right-0 w-[100px] h-[100px]' src='https://tabi.lol/assets/feather-406bad7d.png' alt='orisu-nft' />
-          <p className='text-center'>Oris's {nftDetail}</p>
+          <p className='text-center'>{nftDetail}</p>
         </div>
 
         <div className='flex justify-center mt-[15px]'>

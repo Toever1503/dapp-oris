@@ -13,14 +13,14 @@ export const orisNftSlice = createSlice({
         contractInstance: {}
     },
     reducers: {
-        initializeOrisNftContract: (state) => {
+        initializeOrisNftContract: (state, action) => {
             console.log("initalizing OrisNFT")
             try {
                 // @ts-ignore
-                const web3 = new Web3(window.web3.currentProvider);
-                const address = "0x932519E6Ec5faCD3B0011b564206A3D0f7dd9B60" as Address;
+                // const web3 = new Web3(window.web3.currentProvider);
+                const address = "0xB09FB5ADA5A49C3A118Ae3041832feC67d93A50A" as Address;
                 const abi: ContractAbi = orisNftAbi.abi;
-                let contract = new web3.eth.Contract(abi, address);
+                let contract = new action.payload.eth.Contract(abi, address);
                 state.contractInstance = contract;
             } catch (err) {
                 notification.error({

@@ -47,18 +47,19 @@ export default function WalletConnectBtn() {
         // @ts-ignore
         if (window.ethereum) {
             // @ts-ignore
+            window.ethereum.enable();
+            // @ts-ignore
             await window.ethereum.request({ method: "eth_requestAccounts" });
             // @ts-ignore
             const wweb3 = new Web3(window.ethereum);
-            // @ts-ignore
-            window.ethereum.enable();
+            
 
             // Get the user's accounts
             wweb3.eth.getAccounts().then(function (accounts) {
                 // Show the first account
-                console.log('Connected with MetaMask account: ' + accounts[1]);
-                _dispatch(setWalletAddress(accounts));
-                _dispatch(initializeOrisNftContract());
+                console.log('Connected with MetaMask account: ' + accounts);
+                _dispatch(setWalletAddress(accounts[0]));
+                _dispatch(initializeOrisNftContract(wweb3));
             });
             console.log('wallet has connected');
 

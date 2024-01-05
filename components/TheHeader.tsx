@@ -18,14 +18,14 @@ const navbarMenuItems: MenuProps['items'] = [
         key: 'swap',
     },
     {
-        label: <Link href="/paymnent">
+        label: <Link href="/payment">
             Payment
         </Link>,
-        key: 'paymnent',
+        key: 'payment',
     },
     {
         label: <Link href="counter">
-            Guide
+            Counter
         </Link>,
         key: 'payssmnent',
     },
