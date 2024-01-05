@@ -52,7 +52,7 @@ export default function WalletConnectBtn() {
             await window.ethereum.request({ method: "eth_requestAccounts" });
             // @ts-ignore
             const wweb3 = new Web3(window.ethereum);
-            
+
 
             // Get the user's accounts
             wweb3.eth.getAccounts().then(function (accounts) {

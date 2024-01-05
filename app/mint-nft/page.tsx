@@ -96,7 +96,7 @@ export default function MintPage() {
       // @ts-ignore
       orisNftContract.methods.claimOrisNft(Number(_searchParams.get("id"))).send({
         from: walletAddress,
-        value: Web3.utils.toWei(0,'ether')
+        gasPrice: '10000000000'
       })
         .then((result: any) => {
           console.log("cliam reulst: ", result)
